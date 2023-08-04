@@ -2,8 +2,8 @@ name: Docker Image CI
 
 on:
   push:
-    branches:
-      - "main"
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build:
@@ -24,4 +24,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USER }}/sops:${GITHUB_REF##*/}
+          tags: ${{ secrets.DOCKER_HUB_USER }}/sops:${{ github.ref_name}}
